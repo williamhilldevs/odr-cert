@@ -2,6 +2,23 @@
 <head>
 </head>
 <body>
-Hello ODR cert.
+	<br>
+	<center>
+		ODR Repo for:
+		<h1 id="env">CERT</h1>
+		<br>
+		<div>Last edit: <br><p id="lastEdit"></p></div>
+	</center>
+	
+    <script>
+	  const repo = window.location.pathname;
+	  const env = document.getElementById('env').innerText.toLowerCase();
+  	  const fetchLastEdit = () => fetch(`${repo}games/${env}/AssetPackManifest.plist`).then(resp => {
+  	    const lastEdit = resp.headers.get('last-modified');
+  	    const target = document.getElementById('lastEdit');
+  	    target.innerHTML = lastEdit;
+  	  });
+  	  setTimeout(fetchLastEdit, 1 * 1000);
+    </script>
 </body>
 </html>
